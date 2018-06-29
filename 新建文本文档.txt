@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Welcome to 陈合龙的网站</title>
+
+<style>
+*{
+text-align:center;margin:
+0;padding:0}
+
+body,html{
+    width:100%;
+    height:100%;
+overflow:hidden;
+background:url(https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527086220652&di=30a5a1fe8b20c2fb54fb7d873312e5fb&imgtype=0&src=http%3A%2F%2Fpic1.win4000.com%2Fwallpaper%2Fd%2F5993edf46d3fb.jpg) no-repeat;
+background-size:cover;
+}
+
+
+</style>
+</head>
+<body>
+
+
+<!-- 人体时钟
+ <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=8,0,0,0" width="500" height="500" id="honehoneclock" align="middle">
+ <param name="allowScriptAccess" value="always">
+ <param name="movie" value="http://chabudai.sakura.ne.jp/blogparts/honehoneclock/honehone_clock_wh.swf">
+ <param name="quality" value="high">
+ <param name="bgcolor" value="#ffffff">
+ <param name="wmode" value="transparent">
+ <embed wmode="transparent" src="http://chabudai.sakura.ne.jp/blogparts/honehoneclock/honehone_clock_wh.swf" quality="high" bgcolor="#ffffff" width="500" height="500" name="honehoneclock" align="middle" allowscriptaccess="always" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer">
+ </object>-->
+
+
+<!--互动小仓鼠-->
+<object type="application/x-shockwave-flash" style="outline:none;" data="https://cdn.abowman.com/widgets/hamster/hamster.swf?" width="500" height="500"><param name="movie" value="https://cdn.abowman.com/widgets/hamster/hamster.swf?"></param><param name="AllowScriptAccess" value="always"></param><param name="wmode" value="opaque"></param></object>
+
+</body>
+ 
+</html>
+
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script>
+function identifyUA() {
+    var userAgent = navigator.userAgent.toLowerCase();
+    var platform ='';
+    if(userAgent == null || userAgent == ''){
+        platform = 'www.chenhelong.cn' ; 
+    }else{
+        if(userAgent.indexOf("android") != -1 ){ 
+            platform = 'm.chenhelong.cn';
+        }else if(userAgent.indexOf("ios") != -1 || userAgent.indexOf("iphone") != -1){ 
+            platform = 'm.chenhelong.cn';
+        }else if(userAgent.indexOf("ipad") != -1) {
+            platform = 'www.chenhelong.cn';
+        }else if(userAgent.indexOf("windows phone") != -1 ){ 
+            platform = 'www.chenhelong.cn';
+        }else{
+            platform = 'www.chenhelong.cn' ;
+        }
+    }
+    if (window.location.host !=platform) {
+    	window.location.href = 'http://'+platform;
+    }
+}
+identifyUA();
+
+</script>
+<script>
+$.ajax({
+	url:"https://api.chenhelong.cn/apis_get_test_lists/?id=666",
+	type:"get",
+    dataType:"json",
+	success:function(res){
+	   console.log(res);
+	   alert(JSON.stringify(res));
+        }
+})
+</script>
+<script>
+$.ajax({
+    url:"https://api.chenhelong.cn/?id=2223",
+    type:"get",
+    data:'222',
+    dataType:"json",
+    success:function(res){
+       console.log(res);
+       alert(JSON.stringify(res));
+    }
+})
+</script>
+<script>
+$.ajax({
+        url:"https://api.chenhelong.cn/apis_post_order_list",
+        type:"post",
+        data:{a:666,b:3333},
+        dataType:"json",
+        success:function(res){
+           console.log(res);
+           alert(JSON.stringify(res));
+        }
+})
+</script>

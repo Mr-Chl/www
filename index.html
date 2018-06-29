@@ -1,106 +1,339 @@
 ﻿<!DOCTYPE html>
-<html>
+<html style="height: 100%">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>Welcome to 陈合龙的网站</title>
-
-<style>
-*{
-text-align:center;margin:
-0;padding:0}
-
-body,html{
-    width:100%;
-    height:100%;
-overflow:hidden;
-background:url(https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527086220652&di=30a5a1fe8b20c2fb54fb7d873312e5fb&imgtype=0&src=http%3A%2F%2Fpic1.win4000.com%2Fwallpaper%2Fd%2F5993edf46d3fb.jpg) no-repeat;
-background-size:cover;
-}
-
-
-</style>
+   <meta charset="utf-8">
 </head>
-<body>
+<body style="height: 100%; margin: 0">
+<div id="container" style="height: 100%"></div>
+<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
+<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-gl/echarts-gl.min.js"></script>
+<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-stat/ecStat.min.js"></script>
+<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/dataTool.min.js"></script>
+<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
+<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/world.js"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=ZUONbpqGBsYGXNIYHicvbAbM"></script>
+<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/bmap.min.js"></script>
+<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/simplex.js"></script>
+<script type="text/javascript">
+    var dom = document.getElementById("container");
+    var myChart = echarts.init(dom);
+    var app = {};
+    var option = null;
+    var speed = 0; // 速度  max 100
+    var revolution = 0; // 速度 max 7
+    var oilMeter = 2; // 油表 max 2
+    var waterMeter = 0; // 水温表 max 2
+    option = {
+        backgroundColor: '#1b1b1b',
+        tooltip : {
+            formatter: "{a} <br/>{c} {b}"
+        },
+        toolbox: {
+            show : true,
+            feature : {
+                mark : {show: true},
+                restore : {show: true},
+                saveAsImage : {show: true}
+            }
+        },
+        series : [
+            {
+                name:'速度',
+                type:'gauge',
+                min:0,
+                max:220,
+                splitNumber:11,
+                radius: '50%',
+                axisLine: {            // 坐标轴线
+                    lineStyle: {       // 属性lineStyle控制线条样式
+                        color: [[0.09, 'lime'],[0.82, '#1e90ff'],[1, '#ff4500']],
+                        width: 3,
+                        shadowColor : '#fff', //默认透明
+                        shadowBlur: 10
+                    }
+                },
+                axisLabel: {            // 坐标轴小标记
+                    textStyle: {       // 属性lineStyle控制线条样式
+                        fontWeight: 'bolder',
+                        color: '#fff',
+                        shadowColor : '#fff', //默认透明
+                        shadowBlur: 10
+                    }
+                },
+                axisTick: {            // 坐标轴小标记
+                    length :15,        // 属性length控制线长
+                    lineStyle: {       // 属性lineStyle控制线条样式
+                        color: 'auto',
+                        shadowColor : '#fff', //默认透明
+                        shadowBlur: 10
+                    }
+                },
+                splitLine: {           // 分隔线
+                    length :25,         // 属性length控制线长
+                    lineStyle: {       // 属性lineStyle（详见lineStyle）控制线条样式
+                        width:3,
+                        color: '#fff',
+                        shadowColor : '#fff', //默认透明
+                        shadowBlur: 10
+                    }
+                },
+                pointer: {           // 分隔线
+                    shadowColor : '#fff', //默认透明
+                    shadowBlur: 5
+                },
+                title : {
+                    textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+                        fontWeight: 'bolder',
+                        fontSize: 20,
+                        fontStyle: 'italic',
+                        color: '#fff',
+                        shadowColor : '#fff', //默认透明
+                        shadowBlur: 10
+                    }
+                },
+                detail : {
+                    backgroundColor: 'rgba(30,144,255,0.8)',
+                    borderWidth: 1,
+                    borderColor: '#fff',
+                    shadowColor : '#fff', //默认透明
+                    shadowBlur: 5,
+                    offsetCenter: [0, '50%'],       // x, y，单位px
+                    textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+                        fontWeight: 'bolder',
+                        color: '#fff'
+                    }
+                },
+                data:[{value: 0, name: 'km/h'}]
+            },
+            {
+                name:'转速',
+                type:'gauge',
+                center : ['25%', '55%'],    // 默认全局居中
+                radius : '30%',
+                min:0,
+                max:7,
+                endAngle:45,
+                splitNumber:7,
+                axisLine: {            // 坐标轴线
+                    lineStyle: {       // 属性lineStyle控制线条样式
+                        color: [[0.29, 'lime'],[0.86, '#1e90ff'],[1, '#ff4500']],
+                        width: 2,
+                        shadowColor : '#fff', //默认透明
+                        shadowBlur: 10
+                    }
+                },
+                axisLabel: {            // 坐标轴小标记
+                    textStyle: {       // 属性lineStyle控制线条样式
+                        fontWeight: 'bolder',
+                        color: '#fff',
+                        shadowColor : '#fff', //默认透明
+                        shadowBlur: 10
+                    }
+                },
+                axisTick: {            // 坐标轴小标记
+                    length :12,        // 属性length控制线长
+                    lineStyle: {       // 属性lineStyle控制线条样式
+                        color: 'auto',
+                        shadowColor : '#fff', //默认透明
+                        shadowBlur: 10
+                    }
+                },
+                splitLine: {           // 分隔线
+                    length :20,         // 属性length控制线长
+                    lineStyle: {       // 属性lineStyle（详见lineStyle）控制线条样式
+                        width:3,
+                        color: '#fff',
+                        shadowColor : '#fff', //默认透明
+                        shadowBlur: 10
+                    }
+                },
+                pointer: {
+                    width:5,
+                    shadowColor : '#fff', //默认透明
+                    shadowBlur: 5
+                },
+                title : {
+                    offsetCenter: [0, '-30%'],       // x, y，单位px
+                    textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+                        fontWeight: 'bolder',
+                        fontStyle: 'italic',
+                        color: '#fff',
+                        shadowColor : '#fff', //默认透明
+                        shadowBlur: 10
+                    }
+                },
+                detail : {
+                    //backgroundColor: 'rgba(30,144,255,0.8)',
+                   // borderWidth: 1,
+                    borderColor: '#fff',
+                    shadowColor : '#fff', //默认透明
+                    shadowBlur: 5,
+                    width: 80,
+                    height:30,
+                    offsetCenter: [25, '20%'],       // x, y，单位px
+                    textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+                        fontWeight: 'bolder',
+                        color: '#fff'
+                    }
+                },
+                data:[{value: 0, name: 'x1000 r/min'}]
+            },
+            {
+                name:'油表',
+                type:'gauge',
+                center : ['75%', '50%'],    // 默认全局居中
+                radius : '30%',
+                min:0,
+                max:2,
+                startAngle:135,
+                endAngle:45,
+                splitNumber:2,
+                axisLine: {            // 坐标轴线
+                    lineStyle: {       // 属性lineStyle控制线条样式
+                        color: [[0.2, 'lime'],[0.8, '#1e90ff'],[1, '#ff4500']],
+                        width: 2,
+                        shadowColor : '#fff', //默认透明
+                        shadowBlur: 10
+                    }
+                },
+                axisTick: {            // 坐标轴小标记
+                    length :12,        // 属性length控制线长
+                    lineStyle: {       // 属性lineStyle控制线条样式
+                        color: 'auto',
+                        shadowColor : '#fff', //默认透明
+                        shadowBlur: 10
+                    }
+                },
+                axisLabel: {
+                    textStyle: {       // 属性lineStyle控制线条样式
+                        fontWeight: 'bolder',
+                        color: '#fff',
+                        shadowColor : '#fff', //默认透明
+                        shadowBlur: 10
+                    },
+                    formatter:function(v){
+                        switch (v + '') {
+                            case '0' : return 'E';
+                            case '1' : return '油表';
+                            case '2' : return 'F';
+                        }
+                    }
+                },
+                splitLine: {           // 分隔线
+                    length :15,         // 属性length控制线长
+                    lineStyle: {       // 属性lineStyle（详见lineStyle）控制线条样式
+                        width:3,
+                        color: '#fff',
+                        shadowColor : '#fff', //默认透明
+                        shadowBlur: 10
+                    }
+                },
+                pointer: {
+                    width:2,
+                    shadowColor : '#fff', //默认透明
+                    shadowBlur: 5
+                },
+                title : {
+                    show: false
+                },
+                detail : {
+                    show: false
+                },
+                data:[{value: 1.8, name: 'gas'}]
+            },
+            {
+                name:'水表',
+                type:'gauge',
+                center : ['75%', '50%'],    // 默认全局居中
+                radius : '30%',
+                min:0,
+                max:2,
+                startAngle:315,
+                endAngle:225,
+                splitNumber:2,
+                axisLine: {            // 坐标轴线
+                    lineStyle: {       // 属性lineStyle控制线条样式
+                        color: [[0.2, 'lime'],[0.8, '#1e90ff'],[1, '#ff4500']],
+                        width: 2,
+                        shadowColor : '#fff', //默认透明
+                        shadowBlur: 10
+                    }
+                },
+                axisTick: {            // 坐标轴小标记
+                    show: false
+                },
+                axisLabel: {
+                    textStyle: {       // 属性lineStyle控制线条样式
+                        fontWeight: 'bolder',
+                        color: '#fff',
+                        shadowColor : '#fff', //默认透明
+                        shadowBlur: 10
+                    },
+                    formatter:function(v){
+                        switch (v + '') {
+                            case '0' : return 'H';
+                            case '1' : return '水温°';
+                            case '2' : return 'C';
+                        }
+                    }
+                },
+                splitLine: {           // 分隔线
+                    length :15,         // 属性length控制线长
+                    lineStyle: {       // 属性lineStyle（详见lineStyle）控制线条样式
+                        width:3,
+                        color: '#fff',
+                        shadowColor : '#fff', //默认透明
+                        shadowBlur: 10
+                    }
+                },
+                pointer: {
+                    width:2,
+                    shadowColor : '#fff', //默认透明
+                    shadowBlur: 5
+                },
+                title : {
+                    show: false
+                },
+                detail : {
+                    show: false
+                },
+                data:[{value: 0.2, name: 'gas'}]
+            }
+        ]
+    };
 
+    var times = setInterval(function (){
+        var a = 3;
+        revolution += 0.1;
+        speed += 2;
+        if (speed > 50) {
+            a++
+        }
+        if (revolution > a ) {
+            revolution = 2;
+            speed  = speed * 1.1;    
+        }
+        if (speed >= 220) {
+            clearInterval(times);
+            runing();
+            speed = 0; // 速度  max 100
+            revolution = 0; // 速度 max 7
+            oilMeter = 0; // 油表 max 2
+            waterMeter = 0; // 水温表 max 2
+        }
+        runing();
+    },150);
 
-<!-- 人体时钟
- <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=8,0,0,0" width="500" height="500" id="honehoneclock" align="middle">
- <param name="allowScriptAccess" value="always">
- <param name="movie" value="http://chabudai.sakura.ne.jp/blogparts/honehoneclock/honehone_clock_wh.swf">
- <param name="quality" value="high">
- <param name="bgcolor" value="#ffffff">
- <param name="wmode" value="transparent">
- <embed wmode="transparent" src="http://chabudai.sakura.ne.jp/blogparts/honehoneclock/honehone_clock_wh.swf" quality="high" bgcolor="#ffffff" width="500" height="500" name="honehoneclock" align="middle" allowscriptaccess="always" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer">
- </object>-->
-
-
-<!--互动小仓鼠-->
-<object type="application/x-shockwave-flash" style="outline:none;" data="https://cdn.abowman.com/widgets/hamster/hamster.swf?" width="500" height="500"><param name="movie" value="https://cdn.abowman.com/widgets/hamster/hamster.swf?"></param><param name="AllowScriptAccess" value="always"></param><param name="wmode" value="opaque"></param></object>
-
+    function runing() {
+        option.series[0].data[0].value = speed.toFixed(2) - 0; // 车速
+        option.series[1].data[0].value = revolution.toFixed(2) - 0;    // 转速
+        // option.series[2].data[0].value = oilMeter;  // 油表
+        // option.series[3].data[0].value = waterMeter;  // 水温表
+        myChart.setOption(option);
+    }
+    if (option && typeof option === "object") {
+        myChart.setOption(option, true);
+    }
+</script>
 </body>
- 
 </html>
-
-<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
-<script>
-function identifyUA() {
-    var userAgent = navigator.userAgent.toLowerCase();
-    var platform ='';
-    if(userAgent == null || userAgent == ''){
-        platform = 'www.chenhelong.cn' ; 
-    }else{
-        if(userAgent.indexOf("android") != -1 ){ 
-            platform = 'm.chenhelong.cn';
-        }else if(userAgent.indexOf("ios") != -1 || userAgent.indexOf("iphone") != -1){ 
-            platform = 'm.chenhelong.cn';
-        }else if(userAgent.indexOf("ipad") != -1) {
-            platform = 'www.chenhelong.cn';
-        }else if(userAgent.indexOf("windows phone") != -1 ){ 
-            platform = 'www.chenhelong.cn';
-        }else{
-            platform = 'www.chenhelong.cn' ;
-        }
-    }
-    if (window.location.host !=platform) {
-    	window.location.href = 'http://'+platform;
-    }
-}
-identifyUA();
-
-</script>
-<script>
-$.ajax({
-	url:"https://api.chenhelong.cn/apis_get_test_lists/?id=666",
-	type:"get",
-    dataType:"json",
-	success:function(res){
-	   console.log(res);
-	   alert(JSON.stringify(res));
-        }
-})
-</script>
-<script>
-$.ajax({
-    url:"https://api.chenhelong.cn/?id=2223",
-    type:"get",
-    data:'222',
-    dataType:"json",
-    success:function(res){
-       console.log(res);
-       alert(JSON.stringify(res));
-    }
-})
-</script>
-<script>
-$.ajax({
-        url:"https://api.chenhelong.cn/apis_post_order_list",
-        type:"post",
-        data:{a:666,b:3333},
-        dataType:"json",
-        success:function(res){
-           console.log(res);
-           alert(JSON.stringify(res));
-        }
-})
-</script>
-
