@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/trianglify/0.4.0/trianglify.min.js"></script>
+	 <style>
+	 	*{margin:0;padding: 0;}
+	 	#wrapper{
+	 		width:100%;
+	 		height:100%;
+	 		overflow: hidden;
+	 		position: absolute;
+	 		left: 0;
+	 		top:0;
+	 	}
+	 	#wrapper .container{
+			width:100%;
+			max-width:1200px;
+	 		height:100%;
+	 		margin: 0 auto;
+	 	}
+	 </style>
+</head>
+<body>
+<canvas width="100%" height="100%"></canvas>
+<div class="wrapper" id="wrapper">
+	<div class="container">
+		<object type="application/x-shockwave-flash" style="outline:none;" data="https://cdn.abowman.com/widgets/hamster/hamster.swf?" width="500" height="500"><param name="movie" value="https://cdn.abowman.com/widgets/hamster/hamster.swf?"></param><param name="AllowScriptAccess" value="always"></param><param name="wmode" value="opaque"></param></object>
+
+
+		<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=8,0,0,0" width="500" height="500" id="honehoneclock" align="middle">
+			 <param name="allowScriptAccess" value="always">
+			 <param name="movie" value="http://chabudai.sakura.ne.jp/blogparts/honehoneclock/honehone_clock_wh.swf">
+			 <param name="quality" value="high">
+			 <param name="bgcolor" value="#ffffff">
+			 <param name="wmode" value="transparent">
+			 <embed wmode="transparent" src="http://chabudai.sakura.ne.jp/blogparts/honehoneclock/honehone_clock_wh.swf" quality="high" bgcolor="#ffffff" width="500" height="500" name="honehoneclock" align="middle" allowscriptaccess="always" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer">
+		 </object>
+	</div>
+</div>
+</body>
+<script>
+	function redraw(){
+	 	var pattern = Trianglify({
+			width: window.innerWidth,
+			height: window.innerHeight
+		});
+        pattern.canvas(document.getElementsByTagName('canvas')[0])
+    }
+    document.getElementById("wrapper").onclick = redraw
+    document.getElementById("wrapper").ontouchstart = redraw
+	redraw()
+</script>
+</html>
